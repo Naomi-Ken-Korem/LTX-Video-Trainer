@@ -13,7 +13,9 @@ from transformers import (
     Qwen2_5_VLForConditionalGeneration,
 )
 
-DEFAULT_VLM_CAPTION_INSTRUCTION = "Shortly describe the content of this video in two sentences."
+# DEFAULT_VLM_CAPTION_INSTRUCTION = "Shortly describe the content of this video in two sentences."
+DEFAULT_VLM_CAPTION_INSTRUCTION = "Shortly describe the content of this video in two sentences, \
+    focus also on the colors of the videos."
 
 
 class CaptionerType(str, Enum):
