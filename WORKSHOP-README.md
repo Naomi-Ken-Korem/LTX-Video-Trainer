@@ -21,6 +21,8 @@ In order to copy files from the VM to your laptop (run from your local laptop):
 scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null <username>@<ip_address>:/remote/path/to/file /local/destination/
 ```
 
+Data for the workshop can be found here:
+https://huggingface.co/datasets/naomiKenKorem/canny_for_workshop/tree/main
 ---
 
 ## 🚀 Part 1: Environment Setup
@@ -32,12 +34,14 @@ scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null <username>@<ip_a
 ```bash
 git clone https://github.com/Naomi-Ken-Korem/LTX-Video-Trainer.git
 cd LTX-Video-Trainer
+git checkout workshop
 ```
 
 Then create a virtual environment and install dependencies:
 
 ```bash
 uv venv
+tmux
 source .venv/bin/activate
 uv sync
 ```
@@ -47,7 +51,7 @@ uv sync
 Instead of Option 1, you can simply activate the existing environment:
 
 ```bash
-cd LTX-Video-Trainer
+cd /LTX-Video-Trainer
 tmux
 source .venv/bin/activate
 ```
@@ -215,6 +219,7 @@ cp <path_to_comfy_checkpoint> /ComfyUI/models/loras/
 
 ```bash
 cd /ComfyUI
+tmux
 source .venv/bin/activate
 python main.py --port 8188 --disable-cuda-malloc --listen 0.0.0.0
 ```

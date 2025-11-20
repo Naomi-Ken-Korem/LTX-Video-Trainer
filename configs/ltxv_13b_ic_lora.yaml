@@ -47,21 +47,19 @@ acceleration:
 
 # Data configuration
 data:
-  preprocessed_data_root: "/path/to/preprocessed/data"
+  preprocessed_data_root: "path to data folder" #Ne need to write ./precomputed
   num_dataloader_workers: 2
 
 # Validation configuration
 validation:
   prompts:
-    - "First validation prompt"
-    - "Second validation prompt"
-    - "Third validation prompt"
+    - "red colored"
+
   reference_videos:
-    - "/path/to/reference_a.mp4"
-    - "/path/to/reference_b.mp4"
-    - "/path/to/reference_c.mp4"
+    - "../canny/reference_videos/bear.mp4"
+
   negative_prompt: "worst quality, inconsistent motion, blurry, jittery, distorted"
-  video_dims: [512, 512, 81] # [width, height, frames]
+  video_dims: [512, 512, 33] # [width, height, frames]
   seed: 42
   inference_steps: 50
   interval: 250 # Set to null to disable validation
@@ -85,7 +83,7 @@ hub:
 
 # W&B configuration
 wandb:
-  enabled: false  # Set to true to enable W&B logging
+  enabled: true  # Set to true to enable W&B logging
   project: "ltxv-trainer"
   entity: null  # Your W&B username or team
   tags: []
@@ -93,4 +91,4 @@ wandb:
 
 # General configuration
 seed: 42
-output_dir: "outputs/ic_lora_13b"
+output_dir: "outputs/ic_lora_13b_canny"

@@ -102,6 +102,7 @@ def caption_media(
         override: Whether to override existing captions
     """
 
+
     # Get list of media files to process
     media_files = _get_media_files(input_path, extensions, recursive)
 
@@ -163,7 +164,7 @@ def caption_media(
     with progress:
         task = progress.add_task("Generating captions", total=len(media_to_process))
 
-        for media_file in media_to_process:
+        for id, media_file in enumerate(media_to_process):
             # Update progress description to show current file
             progress.update(task, description=f"Captioning [bold blue]{media_file.name}[/]")
 
@@ -179,6 +180,11 @@ def caption_media(
                 rel_path = str(media_file.resolve().relative_to(base_dir))
                 # Store the caption with the relative path as key
                 captions[rel_path] = caption
+                if id % 5 == 0:
+                    console.print(f"Captioned {id} media files")
+                    console.print(f"Media file: {media_file}")
+                    console.print(f"Caption: {caption}")
+
 
             except Exception as e:
                 console.print(f"[bold red]Error captioning [bold blue]{media_file}[/]: {e}[/]")
@@ -461,6 +467,8 @@ def main(  # noqa: PLR0913
         llava_next_7b: LLaVA-NeXT-7B model (default)
 
     """
+    
+
 
     # Determine device
     device = device or "cuda" if torch.cuda.is_available() else "cpu"
@@ -483,6 +491,7 @@ def main(  # noqa: PLR0913
 
     # Ensure output path is absolute
     output = Path(output).resolve()
+    assert output.parent.exists(), f"output path folder does not exist: {output}"
     console.print(f"Output will be saved to [bold blue]{output}[/]")
 
     # Initialize captioning model
