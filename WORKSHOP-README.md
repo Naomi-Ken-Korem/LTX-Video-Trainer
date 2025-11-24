@@ -115,13 +115,13 @@ Before running the actual preprocess stage, it's recommended to test with a smal
 To verify that the data is correct, you can run the same command with the `--decode-videos` flag to preview the actual training videos.
 It is better to run this step on a small ammount of videos just to make sure everything goes fine. for that you can
 cp /canny_for_workshop/captions.json /canny_for_workshop/short_test_captions.json
-```
-
 Then manually edit `short_test_captions.json` and remove most entries, keeping only 5-10 for testing.
 
-**Step 2:** Run preprocessing with video decoding:
+Run preprocessing with video decoding:
 
-```bash
+```
+uv pip install huggingface_hub[hf_xet]
+
 python scripts/preprocess_dataset.py /canny_for_workshop/short_test_captions.json \
     --resolution-buckets "960x512x33" \
     --caption-column "caption" \
@@ -138,6 +138,8 @@ python scripts/preprocess_dataset.py /canny_for_workshop/short_test_captions.jso
 Once you've verified everything looks good, run the full preprocessing: 
 
 ```bash
+uv pip install huggingface_hub[hf_xet]
+
 python scripts/preprocess_dataset.py /canny_for_workshop/captions.json \
     --resolution-buckets "960x512x33" \
     --caption-column "caption" \
